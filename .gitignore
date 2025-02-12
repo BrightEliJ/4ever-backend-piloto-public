@@ -1,0 +1,59 @@
+# Diretórios de build e dependências
+target/
+out/
+*.jar
+*.war
+*.ear
+
+# Dependências do Maven
+.mvn/
+**/mvnw
+**/mvnw.cmd
+pom.xml.tag
+pom.xml.releaseBackup
+pom.xml.versionsBackup
+pom.xml.next
+release.properties
+
+# Logs e relatórios de testes
+logs/
+*.log
+test-output/
+hs_err_pid*
+
+# Configurações do IntelliJ IDEA
+.idea/
+*.iml
+*.iws
+
+# Configurações do Eclipse
+.classpath
+.project
+.settings/
+
+# Arquivos do sistema operacional
+.DS_Store
+Thumbs.db
+
+# Arquivos de ambiente
+.env
+*.env
+
+# Arquivos de cobertura de testes (JaCoCo, cobertura)
+jacoco.exec
+coverage/
+target/site/
+
+# Banco de dados embutido (H2, HSQLDB)
+*.db
+*.mv.db
+*.h2.db
+
+# Docker
+.dockerignore
+docker-compose.override.yml
+
+# Arquivos temporários
+*.swp
+*.swo
+*~

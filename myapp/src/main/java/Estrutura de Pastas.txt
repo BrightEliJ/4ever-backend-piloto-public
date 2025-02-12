@@ -1,0 +1,79 @@
+tim/field/application
+├── config                               # Configurações gerais da aplicação
+│   ├── CachedBodyHttpServletRequest.java  # Classe para armazenar e reutilizar o corpo da requisição HTTP
+│   ├── CachedBodyServletInputStream.java  # Stream customizado para leitura eficiente do corpo da requisição
+│   ├── JacksonConfig.java                 # Configurações para serialização e formatação (ex.: datas) usando Jackson
+│   └── WebConfig.java                     # Configurações do servidor web, como CORS
+│
+├── controller                           # Controladores gerais da API (use para controladores genéricos ou não categorizados)
+│   (Vazio ou controladores gerais apenas)
+│
+├── logging                              # Pacote dedicado ao gerenciamento de logs
+│   ├── model                            # Modelos JPA para logs
+│   │   └── Log.java                     # Entidade representando logs no banco de dados
+│   ├── repository                       # Repositórios para logs
+│   │   └── LogRepository.java           # Interface JPA para acessar e manipular registros de logs
+│   ├── service                          # Serviços para lógica de logs
+│   │   └── LogService.java              # Serviço responsável por registrar logs de eventos no sistema
+│   └── filter                           # Filtros relacionados ao gerenciamento de logs
+│       └── LoggingFilter.java           # Filtro para registrar logs de requisições automaticamente
+│
+├── security                             # Gerenciamento de autenticação e segurança
+│   ├── filter                           # Filtros específicos para segurança
+│   │   ├── JwtAuthenticationFilter.java # Filtro para autenticar requisições usando JWT (autenticação inicial)
+│   │   ├── JwtAuthorizationFilter.java  # Filtro para validar tokens JWT em requisições (autorização)
+│   │   ├── RefreshTokenFilter.java      # Filtro para renovar tokens de acesso com base em refresh tokens
+│   ├── JwtUtil.java                      # Utilitário para geração, validação e manipulação de tokens JWT
+│   ├── PasswordEncoderConfig.java        # Configuração para criptografia de senhas usando BCrypt
+│   ├── PermissionAuthorizationManager.java # Gerenciamento de permissões e verificação de privilégios específicos
+│   ├── SecurityConfig.java               # Configuração principal do Spring Security para toda a aplicação
+│   └── CustomLogoutHandler.java          # Handler para registrar logs de logout antes da limpeza do contexto
+│
+├── user                                 # Gerenciamento de usuários e seus relacionamentos
+│   ├── controller                       # Endpoints relacionados a usuários
+│   │   ├── AuthController.java           # Endpoint para autenticação de usuários (login)
+│   │   ├── LoginController.java          # Controle para processos de login adicionais
+│   │   ├── TwoFactorController.java      # Controle de autenticação em duas etapas (2FA)
+│   │   └── UserAccountController.java    # Controle para gerenciamento de contas de usuários (CRUD)
+│   │
+│   ├── dto                              # Objetos de Transferência de Dados (DTOs) para comunicação com a API
+│   │   ├── ActivationRequestDTO.java     # DTO para requisições de ativação de conta
+│   │   ├── LoginRequestDTO.java          # DTO para requisições de login
+│   │   ├── PasswordResetConfirmDTO.java  # DTO para confirmação de redefinição de senha
+│   │   ├── PasswordResetRequestDTO.java  # DTO para solicitações de redefinição de senha
+│   │   ├── TotpResponseDTO.java          # DTO para respostas relacionadas a autenticação TOTP
+│   │   ├── UserDTO.java                  # DTO para dados de usuários
+│   │   └── UserResponseDTO.java          # DTO para respostas relacionadas a usuários
+│   │
+│   ├── model                            # Entidades JPA representando tabelas no banco de dados
+│   │   ├── User.java                     # Entidade para representar usuários no banco de dados
+│   │   ├── Group.java                    # Entidade para representar grupos (ex.: equipes ou empresas)
+│   │   ├── Permission.java               # Entidade para permissões associadas a usuários ou grupos
+│   │   ├── GroupPermission.java          # Relacionamento entre grupos e permissões
+│   │   ├── GroupPermissionId.java        # Chave composta para a entidade GroupPermission
+│   │   ├── UserUserGroup.java            # Relacionamento entre usuários e grupos
+│   │   ├── UserUserGroupId.java          # Chave composta para a entidade UserUserGroup
+│   │   ├── UserPermission.java           # Relacionamento entre usuários e permissões
+│   │   └── UserPermissionId.java         # Chave composta para a entidade UserPermission
+│   │
+│   ├── repository                       # Repositórios Spring Data JPA para acessar dados relacionados a usuários
+│   │   ├── UserRepository.java           # Repositório para acessar dados da tabela `users`
+│   │   ├── GroupRepository.java          # Repositório para acessar dados da tabela `groups`
+│   │   ├── PermissionRepository.java     # Repositório para acessar dados da tabela `permissions`
+│   │   ├── GroupPermissionRepository.java# Repositório para dados associativos de `group_permissions`
+│   │   └── UserPermissionRepository.java # Repositório para dados associativos de `user_permissions`
+│   │
+│   └── service                          # Serviços e lógica de negócios para usuários
+│       ├── CustomUserDetailsService.java # Implementação de UserDetailsService do Spring Security
+│       ├── GroupService.java             # Serviço para gerenciamento de grupos
+│       ├── PermissionService.java        # Serviço para gerenciamento de permissões
+│       ├── TwoFactorService.java         # Serviço para lógica de autenticação em duas etapas
+│       └── UserService.java              # Serviço para lógica de negócios de usuários
+│
+├── util                                 # Utilitários gerais da aplicação
+│   ├── BooleanToStringConverter.java     # Conversor para armazenar booleanos como strings no banco de dados
+│   ├── FileProcessorTracker.java         # Lógica de manipulação de arquivos
+│   ├── ResponseUtil.java                 # Classe utilitária para padronização das respostas da API
+│   └── TimeZoneCheck.java                # Manipulação e validação de fusos horários
+│
+└── Field.java                           # Classe principal da aplicação com a anotação @SpringBootApplication
